@@ -3,10 +3,13 @@
 # ~/.zsh_aliases for aliases
 # ~/.system_colors/.hostcolor for color of the prompt
 
+echo "asdf"
+pwd
 
 # Keep the list of aliases in a separate file
 # Helps keep this file clean
 if [ -f zsh_aliases ]; then
+  echo "aaaa"
   . ./zsh_aliases
 fi
 
