@@ -1,4 +1,4 @@
-## This file contains bash aliases, and should be loaded by .bashrc
+zsh_aliases## This file contains bash aliases, and should be loaded by .bashrc
 
 #Global aliases: expanded anywhere on the line
 alias -g ...='../..'

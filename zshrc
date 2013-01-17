@@ -6,8 +6,8 @@
 
 # Keep the list of aliases in a separate file
 # Helps keep this file clean
-if [ -f ~/.zsh_aliases ]; then
-  . ~/.zsh_aliases
+if [ -f zsh_aliases ]; then
+  . ./zsh_aliases
 fi
 
 ############################################################
