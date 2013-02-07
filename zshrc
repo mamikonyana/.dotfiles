@@ -10,6 +10,16 @@ if [ -f zsh_aliases ]; then
   . ./zsh_aliases
 fi
 
+
+################################################################################
+#  OS type
+################################################################################
+
+OS="Linux"
+if [ "$HOME" = "/Users/$USER" ]; then
+  OS="OSX"
+fi
+
 ############################################################
 # Environment variables
 ############################################################
@@ -69,7 +79,9 @@ fi
 
 
 function extract_open_arc_differentials {
-  git log 2> /dev/null --author=arsen -n 30| grep -Pzo "(Author: .* <$USER@locu.com>)(\n.*){3,11}?(\n    Differential Revision: .*|\n    Reviewed By: [a-z]*)" | grep "Differential Revision:" | grep -Po "(http://phabricator.locu.com/D[0-9]{1,})"
+  if [ $OS = "Linux" ]; then
+    git log 2> /dev/null --author=arsen -n 30| grep -Pzo "(Author: .* <$USER@locu.com>)(\n.*){3,11}?(\n    Differential Revision: .*|\n    Reviewed By: [a-z]*)" | grep "Differential Revision:" | grep -Po "(http://phabricator.locu.com/D[0-9]{1,})"
+  fi
 }
 
 function parse_arc_differential {
