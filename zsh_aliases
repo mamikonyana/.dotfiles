@@ -23,6 +23,7 @@ alias grep='grep --color'
 # Aliases for the function in .function
 alias mvrepo='. ~/.functions/move_and_checkout_repo.sh'
 alias createscript='~/.functions/copy_locu_script_template_to.sh'
+alias mvback='~/.functions/move_locu_repo_back.sh'
 
 #Locu aliases
 alias dev1='ssh locudev1'
