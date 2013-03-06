@@ -121,6 +121,21 @@ echo -e "\x1b]6;1;bg;red;brightness;$red_value\x07\x1b]6;1;bg;green;brightness;$
 # Smart tab titles
 ################################################################################
 
+function set_tab_title {
+    rlength="20"
+    tab_label="$PWD:h:t/$PWD:t"
+    echo -ne "\e]1;${(l:rlength:)tab_label}\a"
+}
+set_tab_title
+PS2=set_tab_title
+
+bell=`tput bel` 
+precmd () { 
+  echo -n "\033]2;$PWD >- $USERNAME@$HOST ($status)$bell" 
+} 
+#PROMPT='%m %B%3c%(#.#.>)%b ' 
+RPROMPT=''
+
 #LASTCMD_START=0
 #TITLEHOST=`hostname`
 #
