@@ -24,6 +24,7 @@ alias grep='grep --color'
 alias mvrepo='. ~/.functions/move_and_checkout_repo.sh'
 alias createscript='~/.functions/copy_locu_script_template_to.sh'
 alias mvback='. ~/.functions/move_locu_repo_back.sh'
+alias quickdiff='~/.functions/quick_diff.sh'
 
 #Locu aliases
 alias dev1='ssh locudev1'
@@ -31,4 +32,4 @@ alias dev2='ssh locudev2'
 #alias compute1='mosh --ssh="ssh -i .ssh/web-prod-sec.pem -A" compute1.locu.com'
 alias compute1='ssh -i .ssh/web-prod-sec.pem -A compute1.locu.com'
 
-
+alias lgrep='grep --exclude-dir=logs -r'
