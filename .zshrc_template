@@ -5,3 +5,5 @@ if [ -f "$BASE_DIRECTORY/zshrc" ]; then
   . "$BASE_DIRECTORY/zshrc"
   cd -
 fi
+
+
