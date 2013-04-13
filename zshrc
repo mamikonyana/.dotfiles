@@ -67,16 +67,7 @@ function hashcolor()
   esac
 }
 
-if test -e ~/.system_colors/.hostcolor
-then
-  export HOSTCOLOR=`cat ~/.system_colors/.hostcolor`
-elif test -e /etc/hostcolor
-then
-  export HOSTCOLOR=`cat /etc/hostcolor`
-else
-  export HOSTCOLOR=$(hashcolor `hostname`)
-fi
-
+HOSTCOLOR=$(grep 'prompt: ' ./colors.config | sed 's/prompt: //')
 
 function extract_open_arc_differentials {
   if [ $OS = "Linux" ]; then
@@ -111,9 +102,11 @@ PS1="$base_prompt$path_prompt%{$reset_color%}
 # Tab color
 # ##################################################
 
-red_value=`cat ~/.system_colors/.rgb | cut -d\, -f 1`
-green_value=`cat ~/.system_colors/.rgb | cut -d\, -f 2`
-blue_value=`cat ~/.system_colors/.rgb | cut -d\, -f 3`
+RGB=$(grep 'iterm-rgb: ' ./colors.config | sed 's/iterm-rgb: //')
+
+red_value=`echo $RGB | cut -d\, -f 1`
+green_value=`echo $RGB | cut -d\, -f 2`
+blue_value=`echo $RGB | cut -d\, -f 3`
 
 echo -e "\x1b]6;1;bg;red;brightness;$red_value\x07\x1b]6;1;bg;green;brightness;$green_value\x07\x1b]6;1;bg;blue;brightness;$blue_value\x07"
 
