@@ -1,4 +1,4 @@
-zshrc
+shell-config
 =====
 
-my zshrc file
+My shell configuration aliases, shorcuts, promt, etc.
