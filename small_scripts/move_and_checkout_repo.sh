@@ -1,5 +1,6 @@
 #!/bin/sh
 #short-name: mvrepo
+#interactive-shell: .
 
 mv $1 "_$2"
 cd "_$2"

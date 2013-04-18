@@ -1,5 +1,6 @@
 #!/bin/sh
 #short-name: mvback
+#interactive-shell: .
 
 repo=`git rev-parse --show-toplevel`
 rm $repo/website/settings_environment.py* 2>/dev/null 1>/dev/null

@@ -22,7 +22,11 @@ cp .zshrc_template ~/.zshrc
 sed -i "s+___BASE_DIRECTORY___+`pwd`+g" ~/.zshrc
 
 for script in ./small_scripts/*sh; do
-  echo "alias $(grep '#short-name: ' $script | sed 's+#short-name: ++')='$(pwd)/$script'" >> ~/.zshrc
+  prefix=$(grep '#interactive-shell: ' $script | sed 's+#interactive-shell: ++')
+  if [ "$prefix" ]; then
+    prefix="$prefix "
+  fi
+  echo "alias $(grep '#short-name: ' $script | sed 's+#short-name: ++')='$prefix$(pwd)/$script'" >> ~/.zshrc
 done
 
 if [ "$INITIALIZE_CONFIG_FILES" ] ; then
