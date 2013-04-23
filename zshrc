@@ -49,38 +49,9 @@ autoload -U promptinit
 promptinit
 
 setopt promptsubst
-#prompt adam1
-#
-
-function hashcolor()
-{
-  case `echo $@ | md5sum | head -c 1` in
-    [01]) echo red     ;;
-    [23]) echo green   ;;
-    [45]) echo blue    ;;
-    [67]) echo grey    ;;
-    [89]) echo magenta ;;
-    [ab]) echo yellow  ;;
-    [cd]) echo black   ;;
-    [ef]) echo cyan    ;;
-    *)    echo white ;;
-  esac
-}
 
 HOSTCOLOR=$(grep 'prompt: ' ./colors.config | sed 's/prompt: //')
 
-function extract_open_arc_differentials {
-  if [ $OS = "Linux" ]; then
-    git log 2> /dev/null --author=arsen -n 30| grep -Pzo "(Author: .* <$USER@locu.com>)(\n.*){3,11}?(\n    Differential Revision: .*|\n    Reviewed By: [a-z]*)" | grep "Differential Revision:" | grep -Po "(http://phabricator.locu.com/D[0-9]{1,})"
-  fi
-}
-
-function parse_arc_differential {
-  out=`extract_open_arc_differentials`
-  if [ -n "$out" ]; then
-    echo "\n$out"
-  fi
-}
 
 function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
@@ -93,7 +64,7 @@ prompt_color2=$HOSTCOLOR
 
 
 base_prompt="%{$fg_bold[$prompt_color1]%}%n@%m%{$reset_color%}:"
-path_prompt="%{$fg[$prompt_color2]%}%(4~|...|)%3~%{$fg[red]%}\$(parse_git_branch)\$(parse_arc_differential)"
+path_prompt="%{$fg[$prompt_color2]%}%(4~|...|)%3~%{$fg[red]%}\$(parse_git_branch)"
 
 PS1="$base_prompt$path_prompt%{$reset_color%}
 %{$fg[$prompt_color1]%}%#%{$reset_color%} "
