@@ -9,11 +9,7 @@ function extract_open_arc_differentials {
   fi
 }
 
-function parse_arc_differential {
-  out=`extract_open_arc_differentials`
-  if [ -n "$out" ]; then
-    echo "$out"
-  fi
-}
-
-$(parse_arc_differential)
+out=`extract_open_arc_differentials`
+if [ -n "$out" ]; then
+  echo "$out"
+fi
