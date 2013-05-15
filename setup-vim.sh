@@ -25,8 +25,10 @@ set autoindent
 set guioptions-=m
 set guioptions-=T
 
+" Syntastic checks
 let g:syntastic_enable_signs=0
 let g:syntastic_python_checkers=['flake8', 'pyflakes']
+let g:syntastic_python_flake8_args="--ignore E111"
 
 " Enable Mouse usage
 set mouse=a
@@ -45,7 +47,8 @@ set autowrite
 nnoremap ; :
 
 " Automatically remove trailing whitespaces
-autocmd BufWritePost *.py:%s/\s\+$//e
+" Currently causes 'press enter to continue' when opening the file first time.
+" autocmd BufWritePost *.py:%s/\s\+$//e
 
 " Temporary untill get used to key navigation
 map <up> <nop>
