@@ -31,6 +31,12 @@ let g:syntastic_python_checkers=['flake8', 'pyflakes']
 " Enable Mouse usage
 set mouse=a
 
+" Replace tabs with spaces
+set expandtab
+
+set tabstop=4
+set shiftwidth=4
+
 " Highlight search results
 set hlsearch
 
