@@ -1,5 +1,5 @@
 mkdir -p ~/.vim/autoload ~/.vim/bundle; \
-csdfurl -so ~/.vim/autoload/pathogen.vim \
+curl -so ~/.vim/autoload/pathogen.vim \
     https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 cd ~/.vim/bundle
