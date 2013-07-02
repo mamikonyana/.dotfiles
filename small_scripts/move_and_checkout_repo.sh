@@ -7,4 +7,3 @@ cd "_$2"
 find . -type f -name '*.pyc' -exec rm {} +
 git checkout master
 git pull
-git checkout -b $2

@@ -28,7 +28,10 @@ set guioptions-=T
 " Syntastic checks
 let g:syntastic_enable_signs=0
 let g:syntastic_python_checkers=['flake8', 'pyflakes']
-let g:syntastic_python_flake8_args="--ignore E111"
+" Ignore following errors:
+" E111 indentation is not a multiple of four
+" E121 continuation line indentation is not a multiple of four
+let g:syntastic_python_flake8_args="--ignore E111,E121"
 
 " Enable Mouse usage
 set mouse=a
