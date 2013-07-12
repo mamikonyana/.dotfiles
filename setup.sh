@@ -1,6 +1,7 @@
 #!/bin/zsh
 
 INITIALIZE_CONFIG_FILES='non-empty-string'
+OS='linux'
 
 USAGE="
 Usage: `basename $0` [--update]
@@ -10,6 +11,9 @@ while [ "$1" != "" ]; do
         --update )
             INITIALIZE_CONFIG_FILES=
             ;;
+        --osx )
+            OS="osx"
+            ;;
         * )
             echo $USAGE
             exit 1
@@ -18,8 +22,11 @@ while [ "$1" != "" ]; do
 done
 
 cp .zshrc_template ~/.zshrc
-# TODO(arsen): only works on Linux
-sed -i "s+___BASE_DIRECTORY___+`pwd`+g" ~/.zshrc
+if [[ "$OS" == "osx" ]]; then
+    sed -i "" "s+___BASE_DIRECTORY___+`pwd`+g" ~/.zshrc
+else
+    sed -i "s+___BASE_DIRECTORY___+`pwd`+g" ~/.zshrc
+fi
 
 for script in ./small_scripts/*sh; do
   prefix=$(grep '#interactive-shell: ' $script | sed 's+#interactive-shell: ++')
