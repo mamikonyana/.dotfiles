@@ -29,9 +29,9 @@ export EDITOR=vim
 #############################################################
 # History 
 #############################################################
-export HISTSIZE=5000
-export SAVEHIST=5000
-export HISTFILE=~/.zsh_history
+export HISTSIZE=10000
+export SAVEHIST=10000
+export HISTFILE=~/.histfile
 setopt hist_ignore_dups # ignore same command run 1+ times
 setopt appendhistory #don't overwrite history
 setopt histignorealldups sharehistory #???
