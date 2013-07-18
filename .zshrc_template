@@ -6,4 +6,7 @@ if [ -f "$BASE_DIRECTORY/zshrc" ]; then
   cd -
 fi
 
+if [ -f ".zshrc_local" ]; then
+  . .zshrc_local
+fi
 
