@@ -1,4 +1,4 @@
-shell-config
+.dotfiles
 =====
 
-My shell configuration aliases, shorcuts, promt, etc.
+Contains configuration files, needed to setup a new machine to resemble a working environment.
