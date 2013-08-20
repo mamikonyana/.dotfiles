@@ -54,7 +54,13 @@ HOSTCOLOR=$(grep 'prompt: ' ./colors.config | sed 's/prompt: //')
 
 
 function parse_git_branch {
-  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/ (\1)/'
+  branch=`git symbolic-ref HEAD 2> /dev/null | cut -d'/' -f3`
+  
+  if [ "$branch" = "" ]; then
+    echo "$branch"
+  else
+    echo " ($branch)"
+  fi
 }
 
 autoload -U colors && colors
