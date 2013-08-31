@@ -6,8 +6,7 @@ alias -g ....='../../..'
 alias -g .....='../../../..'
 
 
-# come up with a better test if it's a OSX
-if [ "$HOME" = "/Users/arsen" ]; then
+if [ "$OSTYPE" = "darwin12.0" ]; then
   alias ls='ls -G'
 else
   alias ls='ls --color'

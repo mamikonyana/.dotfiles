@@ -11,15 +11,6 @@ if [ -f zsh_aliases ]; then
 fi
 
 
-################################################################################
-#  OS type
-################################################################################
-
-OS="Linux"
-if [ "$HOME" = "/Users/$USER" ]; then
-  OS="OSX"
-fi
-
 ############################################################
 # Environment variables
 ############################################################
@@ -105,40 +96,6 @@ precmd () {
 } 
 #PROMPT='%m %B%3c%(#.#.>)%b ' 
 RPROMPT=''
-
-#LASTCMD_START=0
-#TITLEHOST=`hostname`
-#
-#function microtime()    { date +'%s.%N' }
-#function set_titlebar() { 
-#  [[ "$TERM" = "xterm" ]] && echo -n $'\e]0;'"$@"'\a' 
-#  [[ "$TERM" = "cygwin" ]] && echo -n $'\e]0;'"$@"'\a' 
-#}
-#
-## Called before user command
-#function preexec(){
-#  set_titlebar $TITLEHOST\$ "$1"
-#  LASTCMD_START=`microtime` 
-#  LASTCMD="$1"
-#}
-#
-## Called after user cmd
-#function precmd(){ 
-#  if [[ "$LEGACY_ZSH" != "1" ]]
-#  then
-#    set_titlebar "$TITLEHOST:`echo "$PWD" | sed "s@^$HOME@~@"`"
-#    local T=0 ; (( T = `microtime` - $LASTCMD_START ))
-#    if (( $LASTCMD_START > 0 )) && (( T>1 ))
-#    then
-#      T=`echo $T | head -c 10` 
-#      LASTCMD=`echo "$LASTCMD" | grep -ioG '^[a-z0-9./_-]*'`
-#      echo "$LASTCMD took $T seconds"
-#    fi
-#    LASTCMD_START=0
-#  fi
-#}
-#
-#
 
 
 #######################################################################################
