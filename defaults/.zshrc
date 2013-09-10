@@ -28,7 +28,7 @@ setopt appendhistory #don't overwrite history
 setopt histignorealldups sharehistory #???
 
 # Use emacs keybindings even if our EDITOR is set to vi
-bindkey -e
+bindkey -v
 
 #############################################################
 # Prompt
