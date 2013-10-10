@@ -98,6 +98,34 @@ precmd () {
 RPROMPT=''
 
 
+LASTCMD_START=0
+function microtime()    { date +'%s.%N' }
+
+#called before user command
+function preexec(){
+  #set_titlebar $TITLEHOST\$ "$1"
+  LASTCMD_START=`microtime` 
+  LASTCMD="$1"
+}
+
+#called after user cmd
+function precmd(){ 
+  if [[ "$LEGACY_ZSH" != "1" ]]
+  then
+    #set_titlebar "$TITLEHOST:`echo "$PWD" | sed "s@^$HOME@~@"`"
+    local T=0 ; (( T = `microtime` - $LASTCMD_START ))
+    if (( $LASTCMD_START > 0 )) && (( T>1 ))
+    then
+      T=`echo $T | head -c 10` 
+      LASTCMD=`echo "$LASTCMD" | grep -ioG '^[a-z0-9./_-]*'`
+      echo "$LASTCMD took $T seconds"
+    fi
+    LASTCMD_START=0
+  fi
+}
+
+
+
 #######################################################################################
 # rest (found in auto options)
 ###################################################################################
