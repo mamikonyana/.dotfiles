@@ -4,6 +4,8 @@ USAGE="
 Usage: `basename $0` [--update]
 "
 install_xmonad=false
+install_zsh=false
+force_install=false
 
 while [ "$1" != "" ]; do
     case "$1"  in
@@ -12,6 +14,9 @@ while [ "$1" != "" ]; do
             ;;
         --zsh )
             install_zsh=true
+            ;;
+        --force-install )
+            force_install=true
             ;;
         * )
             echo $USAGE
@@ -42,12 +47,17 @@ function setup_zsh
     if ! [[ -d ~/.oh-my-zsh ]] ; then
         git clone git@github.com:esqaw/oh-my-zsh.git ~/.oh-my-zsh
     else
-        echo "not cloning repo because it exists"
+        # TODO(arsen): Check that it point to a correct repository.
+        if $force_install ; then
+            rm -rf ~/.oh-my-zsh
+            git clone git@github.com:esqaw/oh-my-zsh.git ~/.oh-my-zsh
+            echo "Deleting the contents of ~/.oh-my-zsh"
+        fi
     fi
     cp ./defaults/zshrc.zsh-template ~/.zshrc
     # Install esqaw theme
     # TODO(arsen): Figure out a way to get this variable from shell, it's there in terminal
-    ZSH_CUSTOM="~/.oh-my-zsh/custom"
+    ZSH_CUSTOM=~/.oh-my-zsh/custom
     mkdir -p $ZSH_CUSTOM/themes
     curl https://raw.githubusercontent.com/esqaw/esqaw-zsh-theme/master/esqaw.zsh-theme -o $ZSH_CUSTOM/themes/esqaw.zsh-theme
 }
