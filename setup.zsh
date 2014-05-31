@@ -15,6 +15,9 @@ while [ "$1" != "" ]; do
         --zsh )
             install_zsh=true
             ;;
+        --vim )
+            install_vim=true
+            ;;
         --force-install )
             force_install=true
             ;;
@@ -62,10 +65,19 @@ function setup_zsh
     curl https://raw.githubusercontent.com/esqaw/esqaw-zsh-theme/master/esqaw.zsh-theme -o $ZSH_CUSTOM/themes/esqaw.zsh-theme
 }
 
+function setup_vim
+{
+   ./setup-vim.sh 
+}
+
 if $install_xmonad ; then
     setup_xmonad
 fi
 
 if $install_zsh ; then
     setup_zsh
+fi
+
+if $install_vim ; then
+    setup_vim
 fi
