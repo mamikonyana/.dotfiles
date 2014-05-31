@@ -1,6 +1,6 @@
 mkdir -p ~/.vim/autoload ~/.vim/bundle; \
 curl -so ~/.vim/autoload/pathogen.vim \
-    https://raw.github.com/tpope/vim-pathogen/master/autoload/pathogen.vim
+    https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
 cd ~/.vim/bundle
 git clone https://github.com/scrooloose/syntastic.git
@@ -14,7 +14,7 @@ cat > ~/.vim/vimrc <<'_EOF'
 " Use pathogen to easily modify the runtime path to include all
 " plugins under the ~/.vim/bundle directory
 call pathogen#helptags()
-call pathogen#incubate()
+call pathogen#infect('bundle/{}')
 
 colorscheme delek
 syntax enable
