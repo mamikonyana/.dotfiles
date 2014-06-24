@@ -16,6 +16,7 @@ fi
 ############################################################
 
 export EDITOR=vim
+export HOSTNAME=`cat /etc/hostname`
 
 #############################################################
 # History 
@@ -29,6 +30,8 @@ setopt histignorealldups sharehistory #???
 
 # Use emacs keybindings even if our EDITOR is set to vi
 bindkey -v
+
+
 
 #############################################################
 # Prompt
