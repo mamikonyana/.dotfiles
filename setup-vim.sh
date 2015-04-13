@@ -39,11 +39,14 @@ set mouse=a
 " Replace tabs with spaces
 set expandtab
 
-set tabstop=4
-set shiftwidth=4
+set tabstop=2
+set shiftwidth=2
 
 " Use strong encryption
 set cm=blowfish
+
+" Spellcheck
+set spell spelllang=en_us
 
 " Highlight search results
 set hlsearch
