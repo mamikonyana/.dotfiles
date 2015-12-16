@@ -1,12 +1,18 @@
-#!/bin/zsh
+#!/bin/sh
+
+set -e
+set -x
+
+echo 4
 
 USAGE="
 Usage: `basename $0` [zsh] [vim] [--force]
 "
 install_xmonad=false
-install_zsh=false
+install_zsh=true
 force_install=false
 install_vim=false
+clean_all=false
 
 while [ "$1" != "" ]; do
     case "$1"  in
@@ -16,11 +22,17 @@ while [ "$1" != "" ]; do
         zsh )
             install_zsh=true
             ;;
+        --skip-zsh )
+            install_zsh=false
+            ;;
         vim )
             install_vim=true
             ;;
         --force )
             force_install=true
+            ;;
+        --clean-all )
+            clean_all=true
             ;;
         * )
             echo $USAGE
@@ -28,6 +40,8 @@ while [ "$1" != "" ]; do
     esac
     shift
 done
+
+echo 8
 
 function setup_X
 {
@@ -73,6 +87,11 @@ function setup_vim
     echo "Installing vim using setup-vim.sh script"
    ./setup-vim.sh 
 }
+
+if $clean_all ; then
+    rm -rf ~/.oh-my-zsh
+    mv ~/.zshrc ~/.zshrc.backup || true
+fi
 
 if $install_xmonad ; then
     setup_xmonad
