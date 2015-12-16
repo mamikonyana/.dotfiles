@@ -1,0 +1,65 @@
+Xcursor.theme: DMZ-Black
+
+*customization: -color
+
+xterm*faceName: Inconsolata
+xterm*faceSize: 9
+xterm*termName:  xterm-256color
+xterm*background: black
+xterm*foreground: grey80
+xterm*cursorBlink: 0
+
+*vt100.translations: #override \n\
+	Ctrl ~Shift <Key>Tab: string(0x1b) string("[27;5;9~") \n \
+	Ctrl Shift <Key>Tab: string(0x1b) string("[27;6;9~") \n
+
+URxvt.saveLines:		65535
+
+URxvt.hideButtons:		1
+URxvt.showMenu:			0
+URxvt.scrollBar:		0
+URxvt.autohideTabbar:	1
+URxvt.syncTabTitle:		1
+
+URxvt.cursorBlink:		0
+URxvt.font:             xft:inconsolata:pixelsize=14
+URxvt.letterSpace:      -1
+
+URxvt.macro.Ctrl+Tab: Dummy
+URxvt.macro.Ctrl+Shift+Tab: Dummy
+
+URxvt.urlLauncher: firefox
+URxvt.colorUL: #86a2be
+
+URxvt.perl-ext-common: default,clipboard,matcher
+!URxvt.shading:            30
+URxvt.transparent:     off
+URxvt.background:      rgba:0000/0000/0000/bbbb
+! Need depth 32 to enable alpha
+URxvt.depth:           32
+URxvt.foreground:      #f0f0f0
+URxvt.colorBD:         white
+URxvt.cursorColor:     green
+URxvt.scrollTtyOutput:     off
+URxvt.scrollWithBuffer:        on
+URxvt.scrollTtyKeypress:   on
+! Use the Xterm palette, since it contrasts better
+URxvt.color1:          #cd0000
+URxvt.color2:          #00cd00
+URxvt.color3:          #cdcd00
+URxvt.color4:          #0000ee
+URxvt.color5:          #cd00cd
+URxvt.color6:          #00cdcd
+URxvt.color7:          #e5e5e5
+URxvt.color8:          #7f7f7f
+URxvt.color9:          #ff0000
+URxvt.color10:         #00ff00
+URxvt.color11:         #ffff00
+URxvt.color12:         #5c5cff
+URxvt.color13:         #ff00ff
+URxvt.color14:         #00ffff
+! Disable silly Ctrl-Shift thing.
+URxvt.iso14755:            false
+URxvt.iso14755_52:     false
+
+xpdf.viKeys: true

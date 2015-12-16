@@ -1,0 +1,12 @@
+# Source the zshrc file from .zsh folder
+BASE_DIRECTORY=___BASE_DIRECTORY___
+if [ -f "$BASE_DIRECTORY/defaults/.zshrc" ]; then
+  cd $BASE_DIRECTORY
+  . "$BASE_DIRECTORY/defaults/.zshrc"
+  cd -
+fi
+
+if [ -f ".zshrc_local" ]; then
+  source .zshrc_local
+fi
+

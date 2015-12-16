@@ -1,0 +1,29 @@
+## This file contains bash aliases, and should be loaded by .bashrc
+
+#Global aliases: expanded anywhere on the line
+alias -g ...='../..'
+alias -g ....='../../..'
+alias -g .....='../../../..'
+
+
+if [ "$OSTYPE" = "darwin12.0" ]; then
+  alias ls='ls -G'
+else
+  alias ls='ls --color'
+fi
+
+alias ll='ls -CFl'
+alias la='ls -A'
+alias vi=vim
+alias cp='cp -iv'
+alias ..='cd ..'
+alias grep='grep --color'
+
+
+#Locu aliases
+alias dev1='ssh locudev1'
+alias dev2='ssh locudev2'
+#alias compute1='mosh --ssh="ssh -i .ssh/web-prod-sec.pem -A" compute1.locu.com'
+alias compute1='ssh -i .ssh/web-prod-sec.pem -A compute1.locu.com'
+
+alias lgrep='grep --exclude-dir=logs -r'

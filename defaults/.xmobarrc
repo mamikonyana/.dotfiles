@@ -1,0 +1,17 @@
+Config { font = "xft:inconsolata-9"
+       , bgColor = "black"
+       , fgColor = "grey"
+       , position = TopW C 100
+       , lowerOnStart = True
+       , commands = [ Run Date "%a %b %d %Y %I:%M:%S %p" "date" 10
+                    , Run Battery ["-t", "bat:<left> (<timeleft>)"] 100
+					, Run Cpu ["-t", "cpu <bar>"] 10
+                    , Run StdinReader
+                    --, Run Mail [("inbox","~/mail/INBOX")] "mail"
+                    --, Run Com "sh -c 'notmuch count --output=threads tag:unread AND NOT tag:killed'"
+                    --      [] "xmail" 100
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%StdinReader%}{%cpu%  %battery%  <fc=#ee9a00>%date%</fc>"
+}
