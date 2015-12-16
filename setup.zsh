@@ -49,7 +49,7 @@ function setup_xmonad
 function setup_zsh
 {
     if ! [[ -d ~/.oh-my-zsh ]] ; then
-        git clone git@github.com:mamikonyana/oh-my-zsh.git ~/.oh-my-zsh
+        git clone git@github.com:robbyrussell/oh-my-zsh.git ~/.oh-my-zsh
     else
         # TODO(arsen): Check that it point to a correct repository.
         if $force_install ; then
