@@ -68,7 +68,7 @@ function setup_zsh
         fi
     fi
     echo "Copied default zsh config into ~/.zshrc"
-    cp ./defaults/zshrc.zsh-template ~/.zshrc
+    curl https://raw.githubusercontent.com/mamikonyana/.dotfiles/gh-pages/defaults/zshrc.zsh-template -o ~/.zshrc
     # Install esqaw theme
     # TODO(arsen): Figure out a way to get this variable from shell, it's there in terminal
     ZSH_CUSTOM=~/.oh-my-zsh/custom
