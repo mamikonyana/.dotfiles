@@ -12,7 +12,17 @@ print '{:3d}'.format(random.randint(16, 255))
 
 HostCol="\[$(tput setaf $(get_random_color 2))\]"
 DirCol="\[$(tput setaf $(get_random_color 5))\]"
-DollarCol="\[$(tput setaf $(get_random_color 4))\]"
+ClockCol="\[$(tput setaf $(get_random_color 4))\]"
+GitCol="\[$(tput setaf $(get_random_color 8))\]"
+
+
+function parse_git_dirty {
+  [[ $(git status 2> /dev/null | tail -n1) != "nothing to commit (working directory clean)" ]] && echo "*"
+}
+
+function parse_git_branch {
+  git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/git: \1$(parse_git_dirty)/"
+}
 
 export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
 
@@ -31,5 +41,5 @@ function __prompt_command() {
         PS1+="${Green}➜  ${ResetCol}"
     fi
 
-    PS1+="${ResetCol}\u@${HostCol}\h ${DirCol}\w${DollarCol} ⌚ \A ${ResetCol}\n$ "
+    PS1+="${ResetCol}\u@${HostCol}\h ${DirCol}\w${GitCol} $(parse_git_branch) ${ClockCol}⌚ \A ${ResetCol}\n$ "
 }
