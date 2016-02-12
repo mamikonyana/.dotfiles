@@ -1,0 +1,35 @@
+function get_random_color {
+  python -c "
+import random
+import socket
+
+random.seed(socket.gethostname())
+for _ in range($1):
+  random.random()
+print '{:3d}'.format(random.randint(16, 255))
+"
+}
+
+HostCol="\[$(tput setaf $(get_random_color 2))\]"
+DirCol="\[$(tput setaf $(get_random_color 5))\]"
+DollarCol="\[$(tput setaf $(get_random_color 4))\]"
+
+export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
+
+function __prompt_command() {
+    local EXIT="$?"             # This needs to be first
+    PS1=""
+
+    local ResetCol='\[\e[0m\]'
+    local Red='\[\e[0;31m\]'
+    local Green='\[\e[0;32m\]'
+
+
+    if [ $EXIT != 0 ]; then
+	PS1+="${Red}➜  ${ResetCol}"
+    else
+        PS1+="${Green}➜  ${ResetCol}"
+    fi
+
+    PS1+="${ResetCol}\u@${HostCol}\h ${DirCol}\w${DollarCol}${ResetCol}\n$ "
+}
