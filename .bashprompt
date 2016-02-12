@@ -31,5 +31,5 @@ function __prompt_command() {
         PS1+="${Green}➜  ${ResetCol}"
     fi
 
-    PS1+="${ResetCol}\u@${HostCol}\h ${DirCol}\w${DollarCol}${ResetCol}\n$ "
+    PS1+="${ResetCol}\u@${HostCol}\h ${DirCol}\w${DollarCol} ⌚ \A ${ResetCol}\n$ "
 }
