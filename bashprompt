@@ -24,8 +24,6 @@ function parse_git_branch {
   git branch --no-color 2> /dev/null | sed -e '/^[^*]/d' -e "s/* \(.*\)/git: \1$(parse_git_dirty)/"
 }
 
-export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
-
 function __prompt_command() {
     local EXIT="$?"             # This needs to be first
     PS1=""
@@ -43,3 +41,5 @@ function __prompt_command() {
 
     PS1+="${ResetCol}\u@${HostCol}\h ${DirCol}$PWD${GitCol} $(parse_git_branch) ${ClockCol}⌚ \A ${ResetCol}\n$ "
 }
+
+export PROMPT_COMMAND=__prompt_command  # Func to gen PS1 after CMDs
