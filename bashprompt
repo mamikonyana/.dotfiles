@@ -41,5 +41,5 @@ function __prompt_command() {
         PS1+="${Green}➜  ${ResetCol}"
     fi
 
-    PS1+="${ResetCol}\u@${HostCol}\h ${DirCol}\w${GitCol} $(parse_git_branch) ${ClockCol}⌚ \A ${ResetCol}\n$ "
+    PS1+="${ResetCol}\u@${HostCol}\h ${DirCol}$PWD${GitCol} $(parse_git_branch) ${ClockCol}⌚ \A ${ResetCol}\n$ "
 }
