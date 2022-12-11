@@ -1,11 +1,11 @@
 #!/bin/sh
 
 set -e
+set -x
 
 USAGE="
 Usage: `basename $0` [zsh] [vim] [--force]
 "
-install_xmonad=false
 install_zsh=true
 force_install=false
 install_vim=false
@@ -13,16 +13,13 @@ clean_all=false
 
 while [ "$1" != "" ]; do
     case "$1"  in
-        --xmonad )
-            install_xmonad=true
-            ;;
         zsh )
             install_zsh=true
             ;;
         --skip-zsh )
             install_zsh=false
             ;;
-        vim )
+        --with-vim )
             install_vim=true
             ;;
         --force )
@@ -44,37 +41,26 @@ function setup_X
     cp ./defaults/.Xdefaults ~/ 
 }
 
-function setup_xmonad
-{
-    setup_X
-    sudo apt-get install xmonad dmenu xmobar
-    mkdir ~/.xmonad
-    cp ./defaults/xmonad.hs ~/.xmonad/
-    cp ./defaults/.dmenurc ~/
-    cp ./defaults/.xmobarrc ~/
-    echo "installing xmonad"
-}
 
 function setup_zsh
 {
+    curl https://raw.githubusercontent.com/mamikonyana/.dotfiles/gh-pages/defaults/zshrc.zsh-template -o ~/.zshrc
     if ! [[ -d ~/.oh-my-zsh ]] ; then
-        git clone git@github.com:ohmyzsh/ohmyzsh.git ~/.oh-my-zsh
+    	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --unattended
     else
         # TODO(arsen): Check that it point to a correct repository.
         if $force_install ; then
             echo "Deleting the contents of ~/.oh-my-zsh"
             rm -rf ~/.oh-my-zsh
-            git clone git@github.com:mamikonyana/oh-my-zsh.git ~/.oh-my-zsh
+    	    sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)" "" --keep-zshrc --unattended
         fi
     fi
-    echo "Copied default zsh config into ~/.zshrc"
-    curl https://raw.githubusercontent.com/mamikonyana/.dotfiles/gh-pages/defaults/zshrc.zsh-template -o ~/.zshrc
-    # Install esqaw theme
     # TODO(arsen): Figure out a way to get this variable from shell, it's there in terminal
     ZSH_CUSTOM=~/.oh-my-zsh/custom
     mkdir -p $ZSH_CUSTOM/themes
     curl https://raw.githubusercontent.com/mamikonyana/esqaw-zsh-theme/master/esqaw.zsh-theme -o $ZSH_CUSTOM/themes/esqaw.zsh-theme
     echo "Done Setting up zsh."
+    exec zsh -l
 }
 
 function setup_vim
@@ -86,10 +72,6 @@ function setup_vim
 if $clean_all ; then
     rm -rf ~/.oh-my-zsh
     mv ~/.zshrc ~/.zshrc.backup || true
-fi
-
-if $install_xmonad ; then
-    setup_xmonad
 fi
 
 if $install_zsh ; then

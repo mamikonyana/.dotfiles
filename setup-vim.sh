@@ -1,13 +1,18 @@
+#!/bin/sh
+
+set -e
+
 mkdir -p ~/.vim/autoload ~/.vim/bundle; \
 curl -so ~/.vim/autoload/pathogen.vim \
     https://raw.githubusercontent.com/tpope/vim-pathogen/master/autoload/pathogen.vim
 
-cd ~/.vim/bundle
-git clone https://github.com/scrooloose/syntastic.git
+if ! [[ -d ~/.vim/bundle/syntastic ]] ; then
+   git clone https://github.com/scrooloose/syntastic.git ~/.vim/bundle/syntastic
+fi
 
-sudo pip install flake8
+sudo pip3 install flake8
 
-rm ~/.vimrc
+rm -f ~/.vimrc
 ln -s ~/.vim/vimrc ~/.vimrc
 
 cat > ~/.vim/vimrc <<'_EOF'
