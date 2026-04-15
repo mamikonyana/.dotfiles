@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# setup.sh — install dotfiles on a new machine (copies, does not symlink)
+# setup.sh — install dotfiles on a new machine
 
 set -euo pipefail
 
@@ -12,22 +12,22 @@ warn()  { printf '\033[1;33mWARN: %s\033[0m\n' "$*"; }
 
 # ---- zsh ----
 info "Installing zshrc"
-cp "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
+ln -sf "$DOTFILES/zsh/zshrc" "$HOME/.zshrc"
 
 # ---- starship ----
 info "Installing starship.toml"
 mkdir -p "$HOME/.config"
-cp "$DOTFILES/starship.toml" "$HOME/.config/starship.toml"
+ln -sf "$DOTFILES/starship.toml" "$HOME/.config/starship.toml"
 
 # ---- i3 ----
 info "Installing i3 config"
 mkdir -p "$HOME/.config/i3"
-cp "$DOTFILES/i3/config" "$HOME/.config/i3/config"
+ln -sf "$DOTFILES/i3/config" "$HOME/.config/i3/config"
 
 HOST_I3="$DOTFILES/i3/hosts/$HOST.conf"
 if [[ -f "$HOST_I3" ]]; then
     info "Applying i3 host config for $HOST"
-    cp "$HOST_I3" "$HOME/.config/i3/local.conf"
+    ln -sf "$HOST_I3" "$HOME/.config/i3/local.conf"
 else
     warn "No i3 host config found for '$HOST' — creating empty local.conf"
     warn "Create i3/hosts/$HOST.conf for display layout and workspace assignments."
