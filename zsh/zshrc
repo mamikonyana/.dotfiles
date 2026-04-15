@@ -1,0 +1,25 @@
+# zshrc — plain zsh + starship
+
+# --- History ---
+export HISTFILE=~/.histfile
+export HISTSIZE=10000
+export SAVEHIST=10000
+setopt hist_ignore_dups
+setopt append_history
+setopt hist_ignore_all_dups
+setopt share_history
+
+# --- Path ---
+export PATH="$HOME/bin:/usr/local/bin:$PATH"
+
+# --- Editor ---
+export EDITOR=vim
+
+# --- Vi keybindings ---
+bindkey -v
+
+# --- Completion ---
+autoload -Uz compinit && compinit
+
+# --- Starship prompt ---
+eval "$(starship init zsh)"
