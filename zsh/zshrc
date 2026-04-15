@@ -24,3 +24,6 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 
 # --- Starship prompt ---
 eval "$(starship init zsh)"
+
+# --- Machine-local settings (not tracked) ---
+[[ -f ~/.zshrc.local ]] && source ~/.zshrc.local

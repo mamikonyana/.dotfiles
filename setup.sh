@@ -66,4 +66,23 @@ if command -v gsettings &>/dev/null; then
     fi
 fi
 
+# ---- zshrc.local — machine-specific settings from ~/.bashrc ----
+BASHRC="$HOME/.bashrc"
+ZSHRC_LOCAL="$HOME/.zshrc.local"
+if [[ -f "$BASHRC" ]]; then
+    info "Generating ~/.zshrc.local from machine-specific lines in ~/.bashrc"
+    # Extract lines after the standard Ubuntu boilerplate ends (bash_completion block).
+    # Capture everything from after the last 'fi' that closes the bash_completion block.
+    awk '
+        /^if ! shopt -oq posix/  { in_block=1 }
+        in_block && /^fi$/       { in_block=0; found=1; next }
+        found                    { print }
+    ' "$BASHRC" > "$ZSHRC_LOCAL"
+    if [[ ! -s "$ZSHRC_LOCAL" ]]; then
+        warn "No machine-specific lines found after the boilerplate in ~/.bashrc — ~/.zshrc.local is empty"
+    fi
+else
+    warn "~/.bashrc not found — skipping ~/.zshrc.local generation"
+fi
+
 info "Done. Open a new terminal or run: exec zsh"
