@@ -17,6 +17,7 @@ export EDITOR=vim
 
 # --- Vi keybindings ---
 bindkey -v
+KEYTIMEOUT=1
 
 # --- Completion ---
 autoload -Uz compinit && compinit
