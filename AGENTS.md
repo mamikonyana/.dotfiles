@@ -71,7 +71,7 @@ workspace $ws7 output DP-1
 
 | Hostname    | Displays                         | Notes                              |
 |-------------|----------------------------------|------------------------------------|
-| dziewana2   | eDP-1 (built-in) + HDMI-1 (4K)  | ws1-5→eDP, ws6-10→HDMI |
+| dziewana2   | eDP-1 (built-in) + HDMI-1 (4K)  | ws1-6→HDMI, ws7-10→eDP |
 
 ## Shell setup details
 
