@@ -48,10 +48,20 @@ if [[ -z "$ZSH_BIN" ]]; then
     ZSH_BIN="$(command -v zsh)"
 fi
 
-CURRENT_SHELL="$(getent passwd "$USER" | cut -d: -f7)"
+CHSH_USER="${SUDO_USER:-$USER}"
+CURRENT_SHELL="$(getent passwd "$CHSH_USER" | cut -d: -f7)"
 if [[ "$CURRENT_SHELL" != "$ZSH_BIN" ]]; then
-    info "Setting zsh as default shell (you may be prompted for your password)"
-    chsh -s "$ZSH_BIN"
+    info "Setting zsh as default shell"
+    # chsh as root (or via sudo) sets the target user's shell without PAM prompting
+    # for that user's password. Prefer sudo when credentials are already valid
+    # (passwordless sudo, or cache from an earlier sudo in this session).
+    if [[ "$(id -u)" -eq 0 ]]; then
+        chsh -s "$ZSH_BIN" "$CHSH_USER"
+    elif command -v sudo >/dev/null 2>&1 && (sudo -n true 2>/dev/null || sudo -v); then
+        sudo chsh -s "$ZSH_BIN" "$CHSH_USER"
+    else
+        chsh -s "$ZSH_BIN"
+    fi
 fi
 
 # ---- GNOME Terminal: use login shell so it respects chsh ----
