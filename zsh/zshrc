@@ -24,5 +24,18 @@ zstyle ':completion:*' matcher-list 'm:{a-zA-Z}={A-Za-z}'
 # --- Starship prompt ---
 eval "$(starship init zsh)"
 
+# --- open (macOS-style) on Linux ---
+if [[ "$OSTYPE" == linux* ]]; then
+  open() {
+    for f in "$@"; do
+      case "${f:l}" in
+        *.json) vim "$f" ;;
+        *.png|*.pdf) xdg-open "$f" >/dev/null 2>&1 &! ;;
+        *) echo "open: no handler for $f" >&2 ;;
+      esac
+    done
+  }
+fi
+
 # --- Machine-local settings (not tracked) ---
 [[ -f ~/.zshrc.local ]] && source ~/.zshrc.local
