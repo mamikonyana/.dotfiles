@@ -76,6 +76,12 @@ if command -v gsettings &>/dev/null; then
     fi
 fi
 
+# ---- IBus: switch input sources with Ctrl+Space (default is Shift+Space) ----
+if command -v gsettings &>/dev/null && gsettings writable org.freedesktop.ibus.general.hotkey triggers &>/dev/null; then
+    info "Setting IBus input-source switcher to Ctrl+Space"
+    gsettings set org.freedesktop.ibus.general.hotkey triggers "['<Control>space']"
+fi
+
 # ---- zshrc.local — machine-specific settings from ~/.bashrc ----
 BASHRC="$HOME/.bashrc"
 ZSHRC_LOCAL="$HOME/.zshrc.local"
