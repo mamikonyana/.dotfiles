@@ -6,6 +6,14 @@ set -euo pipefail
 DOTFILES="$(cd "$(dirname "$0")" && pwd)"
 HOST="$(hostname)"
 OS="$(uname -s)"
+SERVER=false
+
+for arg in "$@"; do
+    case "$arg" in
+        --server) SERVER=true ;;
+        *) printf 'Unknown argument: %s\n' "$arg" >&2; exit 1 ;;
+    esac
+done
 
 # ---- helpers ----
 info()  { printf '\033[1;34m==> %s\033[0m\n' "$*"; }
@@ -30,8 +38,8 @@ if [[ "$OS" == "Darwin" ]]; then
     info "Installing aerospace config"
     mkdir -p "$HOME/.config/aerospace"
     ln -sf "$DOTFILES/aerospace/aerospace.toml" "$HOME/.config/aerospace/aerospace.toml"
-else
-    # ---- i3 (Linux) ----
+elif [[ "$SERVER" == false ]]; then
+    # ---- i3 (Linux desktop) ----
     info "Installing i3 config"
     mkdir -p "$HOME/.config/i3"
     ln -sf "$DOTFILES/i3/config" "$HOME/.config/i3/config"
@@ -50,7 +58,12 @@ fi
 # ---- starship ----
 if ! command -v starship &>/dev/null; then
     info "Installing starship"
-    curl -sS https://starship.rs/install.sh | sh -s -- --yes
+    if [[ "$(id -u)" -eq 0 ]]; then
+        curl -sS https://starship.rs/install.sh | sh -s -- --yes
+    else
+        mkdir -p "$HOME/.local/bin"
+        curl -sS https://starship.rs/install.sh | sh -s -- --yes --bin-dir "$HOME/.local/bin"
+    fi
 fi
 
 # ---- zsh ----
@@ -76,15 +89,17 @@ if [[ -n "${ZSH_BIN:-}" ]]; then
         info "Setting zsh as default shell"
         if [[ "$(id -u)" -eq 0 ]]; then
             chsh -s "$ZSH_BIN" "$CHSH_USER"
-        elif command -v sudo >/dev/null 2>&1 && (sudo -n true 2>/dev/null || sudo -v); then
+        elif command -v sudo >/dev/null 2>&1 && sudo -n true 2>/dev/null; then
             sudo chsh -s "$ZSH_BIN" "$CHSH_USER"
+        elif chsh -s "$ZSH_BIN" 2>/dev/null; then
+            true
         else
-            chsh -s "$ZSH_BIN"
+            warn "Could not set default shell to zsh (no passwordless sudo) — run manually: chsh -s $ZSH_BIN"
         fi
     fi
 fi
 
-if [[ "$OS" != "Darwin" ]]; then
+if [[ "$OS" != "Darwin" ]] && [[ "$SERVER" == false ]]; then
     # ---- GNOME Terminal: use login shell so it respects chsh ----
     if command -v gsettings &>/dev/null; then
         GT_PROFILE="$(gsettings get org.gnome.Terminal.ProfilesList default 2>/dev/null | tr -d "'")"
@@ -102,7 +117,9 @@ if [[ "$OS" != "Darwin" ]]; then
         info "Setting IBus input-source switcher to Ctrl+Space"
         gsettings set org.freedesktop.ibus.general.hotkey triggers "['<Control>space']"
     fi
+fi
 
+if [[ "$OS" != "Darwin" ]]; then
     # ---- zshrc.local — machine-specific settings from ~/.bashrc ----
     BASHRC="$HOME/.bashrc"
     ZSHRC_LOCAL="$HOME/.zshrc.local"

@@ -1,7 +1,18 @@
 # dotfiles — agent guide
 
-This repo manages shell and window manager config for Linux machines.
+This repo manages shell and window manager config across multiple machines.
 Run `setup.sh` to install everything on a new machine.
+
+## Target machines
+
+| Type                  | OS     | Run as                   |
+|-----------------------|--------|--------------------------|
+| Personal laptop       | Ubuntu | `bash setup.sh`          |
+| Personal laptop       | macOS  | `bash setup.sh`          |
+| Personal server       | Ubuntu | `bash setup.sh --server` |
+| Remote servers        | Ubuntu | `bash setup.sh --server` |
+
+`--server` skips all GUI-only config: i3, GNOME Terminal settings, IBus.
 
 ## Repo layout
 
