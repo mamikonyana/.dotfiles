@@ -12,6 +12,8 @@ exec --no-startup-id dex --autostart --environment i3
 exec --no-startup-id setxkbmap -option caps:super
 exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 exec --no-startup-id nm-applet
+exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
+exec --no-startup-id 1password --silent
 
 # Logitech mouse: faster speed/accel + natural scrolling
 exec_always --no-startup-id xinput set-prop "Logitech USB Receiver Mouse" "libinput Accel Speed" 1.0
@@ -84,6 +86,10 @@ bindsym $mod+space        focus mode_toggle
 
 # Focus parent
 bindsym $mod+a focus parent
+
+# Scratchpad
+bindsym $mod+Shift+minus move scratchpad
+bindsym $mod+minus       scratchpad show
 
 # Workspaces
 set $ws1  "1"
