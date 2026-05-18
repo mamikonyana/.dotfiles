@@ -1,10 +1,10 @@
 ## Setup Instructions
 
 ```sh
-curl -sSL http://setup.esqaw.com/ | bash
+curl -sSL https://dot.esqaw.com/setup.sh | bash
 ```
 or 
 
 ```sh
-wget -qO- http://setup.esqaw.com/ | bash
+wget -qO- https://dot.esqaw.com/setup.sh | bash
 ```
