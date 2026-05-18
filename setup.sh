@@ -44,6 +44,10 @@ elif [[ "$SERVER" == false ]]; then
     mkdir -p "$HOME/.config/i3"
     ln -sf "$DOTFILES/i3/config" "$HOME/.config/i3/config"
 
+    info "Installing i3status config"
+    mkdir -p "$HOME/.config/i3status"
+    ln -sf "$DOTFILES/i3/i3status.conf" "$HOME/.config/i3status/config"
+
     HOST_I3="$DOTFILES/i3/hosts/$HOST.conf"
     if [[ -f "$HOST_I3" ]]; then
         info "Applying i3 host config for $HOST"
