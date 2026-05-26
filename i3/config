@@ -15,8 +15,9 @@ exec --no-startup-id nm-applet
 exec --no-startup-id /usr/lib/policykit-1-gnome/polkit-gnome-authentication-agent-1
 exec --no-startup-id 1password --silent
 
-# Logitech mouse: faster speed/accel + natural scrolling
+# Logitech mouse: max accel + 2x pointer speed (Accel Speed caps at 1.0) + natural scrolling
 exec_always --no-startup-id xinput set-prop "Logitech USB Receiver Mouse" "libinput Accel Speed" 1.0
+exec_always --no-startup-id xinput set-prop "Logitech USB Receiver Mouse" "Coordinate Transformation Matrix" 2 0 0 0 2 0 0 0 1
 exec_always --no-startup-id xinput set-prop "Logitech USB Receiver Mouse" "libinput Natural Scrolling Enabled" 1
 
 # Machine-local overrides (display layout, etc.)
